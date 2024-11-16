@@ -2,10 +2,10 @@
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
+import Cookie from 'js-cookie'; // Import js-cookie
 
 const Login = () => {
-  const router = useRouter('');
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,16 +24,15 @@ const Login = () => {
     try {
       const response = await axios.post('https://cars-cred.vercel.app/api/user/login', {
         email: formData.email,
-        password: formData.password
+        password: formData.password,
       });
 
       if (response.data.ok) {
-      
-        localStorage.setItem('token', response.data.authToken);
-        router.push('/')
-        // Redirect based on the email or perform any other action
+        // Set token in cookies instead of localStorage
+        Cookie.set('token', response.data.authToken, { expires: 30, path: '/' }); // Expires in 30 days
+        router.push('/'); // Redirect to home page
       } else {
-        setError(response.data.message);
+        setError(response.data.message); // Display error message
       }
     } catch (err) {
       setError('Login failed. Please check your credentials and try again.');

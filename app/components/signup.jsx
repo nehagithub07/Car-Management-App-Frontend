@@ -1,8 +1,10 @@
 "use client"
 import { useState } from 'react';
 import axios from 'axios'; // Make sure to import axios
+import { useRouter } from 'next/navigation';
 
 const Signup = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,6 +19,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log('Form Data Submitted:', formData);
 
     // Check if passwords match
@@ -26,18 +29,19 @@ const Signup = () => {
     }
 
     try {
-      const token = 'yourTokenHere'; // Replace with actual token
+       // Replace with actual token
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
         formData,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Pass token dynamically
+      
             "Content-Type": "application/json",
           },
         }
       );
       console.log('Response:', response);
+      router.push('/login');
       // Handle success (e.g., redirect or show a success message)
     } catch (error) {
       console.error("Error adding stock:", error);

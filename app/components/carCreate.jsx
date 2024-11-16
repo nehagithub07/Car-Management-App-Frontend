@@ -1,4 +1,5 @@
 "use client";
+import Cookies from "js-cookie";
 import { useState } from "react";
 
 const Carcreate = () => {
@@ -19,7 +20,8 @@ const Carcreate = () => {
     setImages(files);
   };
 
-  const token = localStorage.getItem('token')
+  // const token = localStorage.getItem('token')
+  const token = Cookies.get('token');
   const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append("images", file);
