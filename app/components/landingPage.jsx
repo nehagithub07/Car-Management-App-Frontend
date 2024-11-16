@@ -44,15 +44,15 @@ const LandingPage = () => {
                 className="w-full h-40 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                {/* <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {category.name}
-                </h3>
-                <button
+                </h3> */}
+                {/* <button
                   onClick={() => router.push(`/category/${category.name.toLowerCase()}`)}
                   className="text-blue-600 font-medium hover:underline"
                 >
                   View More
-                </button>
+                </button> */}
               </div>
             </div>
           ))}
