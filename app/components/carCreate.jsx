@@ -16,26 +16,22 @@ const Carcreate = () => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    console.log("Images",files);
     setImages(files);
-    // setFormData({ ...formData, images: files });
   };
 
-     const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token')
   const uploadImage = async (file) => {
-    const formData2 = new FormData();
-    console.log("File",file);
-    formData2.append("images", images);
-    console.log("formdata",formData);
+    const formData = new FormData();
+    formData.append("images", file);
     try {
       // Replace with your upload API endpoint
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cars/upload-images`, {
+      const response = await fetch(`https://cars-cred.vercel.app/api/cars/upload-images`, {
         method: "POST",
-        body: formData2,
+        body: formData,
       });
       const data = await response.json();
       if (response.ok) {
-        return data.url; // Assuming the response contains a `url` key with the image URL
+        return data?.images[0]; // Assuming the response contains a `url` key with the image URL
       } else {
         throw new Error("Image upload failed");
       }
@@ -53,10 +49,9 @@ const Carcreate = () => {
       .split(",")
       .map((tag) => tag.trim())
       .filter((tag) => tag.length > 0);
-  
-    // Upload images and gather URLs
+
     const imageUrls = [];
-    for (let file of formData.images) {
+    for (let file of images) {
       const url = await uploadImage(file); // Upload each image
       if (url) {
         imageUrls.push(url); // Push the URL if upload is successful
@@ -73,7 +68,7 @@ const Carcreate = () => {
   
     // Send to your backend API (replace with actual API endpoint)
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cars/add-car`, {
+      const response = await fetch(`https://cars-cred.vercel.app/api/cars/add-car`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -82,7 +77,6 @@ const Carcreate = () => {
         body: JSON.stringify(submittedData),
       });
       const result = await response.json();
-      console.log("Response from API:", result);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
