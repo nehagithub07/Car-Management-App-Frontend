@@ -11,7 +11,7 @@ const LandingPage = () => {
         <div className="container mx-auto px-6 py-16 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Rent Your Dream Car</h1>
           <p className="text-lg md:text-xl mb-8">
-            Affordable, Reliable, and Convenient Car Rentals Anytime, Anywhere.
+            Affordable Reliable and Convenient Car Rentals Anytime Anywhere
           </p>
           <button
             onClick={() => router.push("/view-all-cars")}
