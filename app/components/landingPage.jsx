@@ -13,12 +13,12 @@ const LandingPage = () => {
           <p className="text-lg md:text-xl mb-8">
             Affordable Reliable and Convenient Car Rentals Anytime Anywhere
           </p>
-          <button
+          {/* <button
             onClick={() => router.push("/view-all-cars")}
             className="bg-white text-blue-600 font-medium py-3 px-6 rounded-md hover:bg-gray-100 transition duration-300 shadow-lg"
           >
             View All Cars
-          </button>
+          </button> */}
         </div>
       </section>
 
